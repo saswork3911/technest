@@ -430,10 +430,11 @@ export function SidebarMenuItem({
   ...props
 }: SidebarMenuItemProps) {
   const itemRef = React.useRef<HTMLDivElement>(null);
+  const generatedId = React.useId();
   // NEW: Get notifyMenuItemRefChange from context
   const { activeMenuItem, menuItemRefs, notifyMenuItemRefChange } =
     useSidebar();
-  const menuItemId = value || React.useId();
+  const menuItemId = value || generatedId;
   const isActive = activeMenuItem === menuItemId;
 
   const isInView = useInView(itemRef, { once: false, amount: 0.5 });
@@ -486,13 +487,14 @@ export function SidebarMenuButton({
   value,
   ...props
 }: SidebarMenuButtonProps) {
+  const generatedId = React.useId();
   const {
     expanded,
     activeMenuItem,
     setActiveMenuItem,
     updateIndicatorPosition,
   } = useSidebar();
-  const menuItemId = value || React.useId();
+  const menuItemId = value || generatedId;
   const isActive = activeMenuItem === menuItemId;
 
   const handleClick = React.useCallback(() => {
